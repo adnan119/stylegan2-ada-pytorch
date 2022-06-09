@@ -10,7 +10,7 @@
 "Training Generative Adversarial Networks with Limited Data"."""
 
 import os
-import click
+# import click
 import re
 import json
 import tempfile
@@ -395,45 +395,45 @@ class CommaSeparatedList(click.ParamType):
 
 #----------------------------------------------------------------------------
 
-@click.command()
-@click.pass_context
+# @click.command()
+# @click.pass_context
 
-# General options.
-@click.option('--outdir', help='Where to save the results', required=True, metavar='DIR')
-@click.option('--gpus', help='Number of GPUs to use [default: 1]', type=int, metavar='INT')
-@click.option('--snap', help='Snapshot interval [default: 50 ticks]', type=int, metavar='INT')
-@click.option('--metrics', help='Comma-separated list or "none" [default: fid50k_full]', type=CommaSeparatedList())
-@click.option('--seed', help='Random seed [default: 0]', type=int, metavar='INT')
-@click.option('-n', '--dry-run', help='Print training options and exit', is_flag=True)
+# # General options.
+# @click.option('--outdir', help='Where to save the results', required=True, metavar='DIR')
+# @click.option('--gpus', help='Number of GPUs to use [default: 1]', type=int, metavar='INT')
+# @click.option('--snap', help='Snapshot interval [default: 50 ticks]', type=int, metavar='INT')
+# @click.option('--metrics', help='Comma-separated list or "none" [default: fid50k_full]', type=CommaSeparatedList())
+# @click.option('--seed', help='Random seed [default: 0]', type=int, metavar='INT')
+# @click.option('-n', '--dry-run', help='Print training options and exit', is_flag=True)
 
-# Dataset.
-@click.option('--data', help='Training data (directory or zip)', metavar='PATH', required=True)
-@click.option('--cond', help='Train conditional model based on dataset labels [default: false]', type=bool, metavar='BOOL')
-@click.option('--subset', help='Train with only N images [default: all]', type=int, metavar='INT')
-@click.option('--mirror', help='Enable dataset x-flips [default: false]', type=bool, metavar='BOOL')
+# # Dataset.
+# @click.option('--data', help='Training data (directory or zip)', metavar='PATH', required=True)
+# @click.option('--cond', help='Train conditional model based on dataset labels [default: false]', type=bool, metavar='BOOL')
+# @click.option('--subset', help='Train with only N images [default: all]', type=int, metavar='INT')
+# @click.option('--mirror', help='Enable dataset x-flips [default: false]', type=bool, metavar='BOOL')
 
-# Base config.
-@click.option('--cfg', help='Base config [default: auto]', type=click.Choice(['auto', 'stylegan2', 'paper256', 'paper512', 'paper1024', 'cifar']))
-@click.option('--gamma', help='Override R1 gamma', type=float)
-@click.option('--kimg', help='Override training duration', type=int, metavar='INT')
-@click.option('--batch', help='Override batch size', type=int, metavar='INT')
+# # Base config.
+# @click.option('--cfg', help='Base config [default: auto]', type=click.Choice(['auto', 'stylegan2', 'paper256', 'paper512', 'paper1024', 'cifar']))
+# @click.option('--gamma', help='Override R1 gamma', type=float)
+# @click.option('--kimg', help='Override training duration', type=int, metavar='INT')
+# @click.option('--batch', help='Override batch size', type=int, metavar='INT')
 
-# Discriminator augmentation.
-@click.option('--aug', help='Augmentation mode [default: ada]', type=click.Choice(['noaug', 'ada', 'fixed']))
-@click.option('--p', help='Augmentation probability for --aug=fixed', type=float)
-@click.option('--target', help='ADA target value for --aug=ada', type=float)
-@click.option('--augpipe', help='Augmentation pipeline [default: bgc]', type=click.Choice(['blit', 'geom', 'color', 'filter', 'noise', 'cutout', 'bg', 'bgc', 'bgcf', 'bgcfn', 'bgcfnc']))
+# # Discriminator augmentation.
+# @click.option('--aug', help='Augmentation mode [default: ada]', type=click.Choice(['noaug', 'ada', 'fixed']))
+# @click.option('--p', help='Augmentation probability for --aug=fixed', type=float)
+# @click.option('--target', help='ADA target value for --aug=ada', type=float)
+# @click.option('--augpipe', help='Augmentation pipeline [default: bgc]', type=click.Choice(['blit', 'geom', 'color', 'filter', 'noise', 'cutout', 'bg', 'bgc', 'bgcf', 'bgcfn', 'bgcfnc']))
 
-# Transfer learning.
-@click.option('--resume', help='Resume training [default: noresume]', metavar='PKL')
-@click.option('--freezed', help='Freeze-D [default: 0 layers]', type=int, metavar='INT')
+# # Transfer learning.
+# @click.option('--resume', help='Resume training [default: noresume]', metavar='PKL')
+# @click.option('--freezed', help='Freeze-D [default: 0 layers]', type=int, metavar='INT')
 
-# Performance options.
-@click.option('--fp32', help='Disable mixed-precision training', type=bool, metavar='BOOL')
-@click.option('--nhwc', help='Use NHWC memory format with FP16', type=bool, metavar='BOOL')
-@click.option('--nobench', help='Disable cuDNN benchmarking', type=bool, metavar='BOOL')
-@click.option('--allow-tf32', help='Allow PyTorch to use TF32 internally', type=bool, metavar='BOOL')
-@click.option('--workers', help='Override number of DataLoader workers', type=int, metavar='INT')
+# # Performance options.
+# @click.option('--fp32', help='Disable mixed-precision training', type=bool, metavar='BOOL')
+# @click.option('--nhwc', help='Use NHWC memory format with FP16', type=bool, metavar='BOOL')
+# @click.option('--nobench', help='Disable cuDNN benchmarking', type=bool, metavar='BOOL')
+# @click.option('--allow-tf32', help='Allow PyTorch to use TF32 internally', type=bool, metavar='BOOL')
+# @click.option('--workers', help='Override number of DataLoader workers', type=int, metavar='INT')
 
 def main(ctx, outdir, dry_run, **config_kwargs):
     """Train a GAN using the techniques described in the paper
